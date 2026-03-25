@@ -34,6 +34,28 @@ public class ServiceEmpleados
                 return null;
             }
         }
+    }     
+    
+    public async Task<List<Empleado>> GetEmpleadosOficioAsync(string oficio)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            string request = "/api/Empleados/EmpleadosByOficio/"+oficio;
+            client.BaseAddress = new Uri(_ApiUrl);
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(_header);
+            HttpResponseMessage response= await client.GetAsync(request);
+
+            if (response.IsSuccessStatusCode == true)
+            {
+                List<Empleado> data= await response.Content.ReadAsAsync<List<Empleado>>();
+                return data;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }  
     
     public async Task<List<string>> GetOficiosAsync()

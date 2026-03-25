@@ -21,4 +21,13 @@ public class EmpleadosController : Controller
         ViewData["OFICIOS"] = oficios;
         return View(empleados);
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> Index(string oficio)
+    {
+        List<string> oficios = await _serviceEmpleados.GetOficiosAsync();
+        List<Empleado> empleados= await _serviceEmpleados.GetEmpleadosOficioAsync(oficio);
+        ViewData["OFICIOS"] = oficios;
+        return View(empleados);
+    }
 }
