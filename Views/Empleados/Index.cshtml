@@ -1,0 +1,42 @@
+﻿@model List<NugetApiModels.Models.Empleado>
+
+
+@{
+    List<string> oficios= ViewData["OFICIOS"] as List<string>;
+}
+
+
+<div>
+    <form method="post">
+        <select name="oficio" class="form-select">
+            <option value="">Selecciona un oficio</option>
+            @foreach (string oficio in oficios)
+            {
+                <option value="@oficio">@oficio</option>
+            }
+        </select>
+        <button class="btn btn-primary mt-2">Filtrar</button>
+    </form>
+</div>
+<h1>Empleados</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Departamento</th>
+        <th>Salario</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (NugetApiModels.Models.Empleado empleado in Model)
+    {
+        <tr>
+            <td>@empleado.IdEmpleado</td>
+            <td>@empleado.Apellido</td>               
+            <td>@empleado.Departamento</td>
+            <td>@empleado.Salario</td>
+        </tr>
+    }
+    </tbody>
+</table>    
